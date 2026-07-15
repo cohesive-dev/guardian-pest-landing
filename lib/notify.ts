@@ -85,12 +85,10 @@ export async function sendLeadNotification(lead: Lead): Promise<void> {
   const bccRecipients = NOTIFY_BCC;
 
   const { plain, html } = buildBody(lead);
-  const who = lead.name?.trim() || lead.phone || lead.email || "someone";
-
   const message: EmailMessage = {
     senderAddress,
     content: {
-      subject: `New inspection request — ${who}${lead.pest ? ` (${lead.pest})` : ""}`,
+      subject: "Guardian Web Lead",
       plainText: plain,
       html,
     },
