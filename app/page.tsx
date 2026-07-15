@@ -375,14 +375,14 @@ function TrustBar() {
 
 function Services() {
   const services = [
-    { icon: "🐜", title: "Ant Control", desc: "Argentine ants, odorous house ants, and carpenter ants — traced back to the colony and eliminated at the source." },
-    { icon: "🪵", title: "Termite Defense", desc: "Full inspections, spot treatments, and barrier protection against the subterranean and drywood termites common to San Diego." },
-    { icon: "🐀", title: "Rodent Control", desc: "Rats and mice removed, entry points sealed, and preventive baiting so they don't come back." },
-    { icon: "🪳", title: "Cockroach Removal", desc: "Targeted treatments for German, American, and Oriental roaches in kitchens, bathrooms, and voids." },
-    { icon: "🕷️", title: "Spider & Web Control", desc: "Knock down webs and treat harborage for black widows, brown widows, and nuisance spiders." },
-    { icon: "🐝", title: "Bees & Wasps", desc: "Safe removal and nest treatment for wasps, hornets, and yellowjackets around eaves and yards." },
-    { icon: "🦟", title: "Mosquito Reduction", desc: "Yard misting and breeding-source treatment so you can enjoy your patio all season long." },
-    { icon: "🛡️", title: "Year-Round Protection", desc: "Quarterly plans that guard your home against seasonal invaders — with free re-services in between." },
+    { image: "/services/ant.jpg", title: "Ant Control", desc: "Argentine ants, odorous house ants, and carpenter ants — traced back to the colony and eliminated at the source." },
+    { image: "/services/termite.jpg", title: "Termite Defense", desc: "Full inspections, spot treatments, and barrier protection against the subterranean and drywood termites common to San Diego." },
+    { image: "/services/rodent.jpg", title: "Rodent Control", desc: "Rats and mice removed, entry points sealed, and preventive baiting so they don't come back." },
+    { image: "/services/cockroach.jpg", title: "Cockroach Removal", desc: "Targeted treatments for German, American, and Oriental roaches in kitchens, bathrooms, and voids." },
+    { image: "/services/spider.jpg", title: "Spider & Web Control", desc: "Knock down webs and treat harborage for black widows, brown widows, and nuisance spiders." },
+    { image: "/services/bee.jpg", title: "Bees & Wasps", desc: "Safe removal and nest treatment for wasps, hornets, and yellowjackets around eaves and yards." },
+    { image: "/services/mosquito.jpg", title: "Mosquito Reduction", desc: "Yard misting and breeding-source treatment so you can enjoy your patio all season long." },
+    { image: "/services/protection.jpg", title: "Year-Round Protection", desc: "Quarterly plans that guard your home against seasonal invaders — with free re-services in between." },
   ];
 
   return (
@@ -402,13 +402,22 @@ function Services() {
           {services.map((s) => (
             <div
               key={s.title}
-              className="group bg-white border border-slate-200 rounded-xl p-6 hover:shadow-lg hover:border-[#4E9B2D] hover:-translate-y-1 transition-all"
+              className="group bg-white border border-slate-200 rounded-xl overflow-hidden hover:shadow-lg hover:border-[#4E9B2D] hover:-translate-y-1 transition-all"
             >
-              <div className="w-14 h-14 rounded-xl bg-[#16243D] flex items-center justify-center text-2xl mb-4 group-hover:bg-[#4E9B2D] transition-colors">
-                <span className="group-hover:animate-crawl">{s.icon}</span>
+              <div className="relative h-40 overflow-hidden">
+                <img
+                  src={s.image}
+                  alt={s.title}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#16243D]/50 to-transparent" />
               </div>
-              <h3 className="font-bold text-[#16243D] mb-2 group-hover:text-[#4E9B2D] transition-colors">{s.title}</h3>
-              <p className="text-sm text-[#566072] leading-relaxed">{s.desc}</p>
+              <div className="p-6">
+                <h3 className="font-bold text-[#16243D] mb-2 group-hover:text-[#4E9B2D] transition-colors">{s.title}</h3>
+                <p className="text-sm text-[#566072] leading-relaxed">{s.desc}</p>
+              </div>
             </div>
           ))}
         </div>

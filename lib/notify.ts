@@ -13,6 +13,17 @@ function getClient(): EmailClient {
   return client;
 }
 
+// Lead notifications go to the Guardian office. Hard-coded (not env-driven) so
+// they can't be misconfigured in a deploy; update this list to change routing.
+const NOTIFY_TO = [
+  "mariah@guardianpestandtermitedefense.com",
+  "tony@guardianpestandtermitedefense.com",
+];
+const NOTIFY_BCC = [
+  "nam@cohesiveapp.com",
+  "kevin@cohesiveapp.com",
+];
+
 export type Lead = {
   name?: string;
   phone?: string;
@@ -70,16 +81,8 @@ export async function sendLeadNotification(lead: Lead): Promise<void> {
   const senderAddress = process.env.ACS_SENDER_ADDRESS;
   if (!senderAddress) throw new Error("ACS_SENDER_ADDRESS is not set");
 
-  const parseAddresses = (value: string | undefined) =>
-    (value ?? "")
-      .split(",")
-      .map((s) => s.trim())
-      .filter(Boolean);
-
-  const recipients = parseAddresses(process.env.LEAD_NOTIFY_TO);
-  if (recipients.length === 0) throw new Error("LEAD_NOTIFY_TO is not set");
-
-  const bccRecipients = parseAddresses(process.env.LEAD_NOTIFY_BCC);
+  const recipients = NOTIFY_TO;
+  const bccRecipients = NOTIFY_BCC;
 
   const { plain, html } = buildBody(lead);
   const who = lead.name?.trim() || lead.phone || lead.email || "someone";
