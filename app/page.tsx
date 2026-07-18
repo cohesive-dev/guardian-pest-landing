@@ -806,7 +806,11 @@ function Footer() {
 
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row gap-3 md:items-center md:justify-between">
           <p className="text-xs">© 2026 Guardian Pest &amp; Termite Defense. All rights reserved.</p>
-          <p className="text-xs text-white/50">Licensed &amp; insured · CA Structural Pest Control Board</p>
+          <p className="text-xs text-white/50">
+            Licensed &amp; insured · CA Structural Pest Control Board
+            <span className="mx-2">·</span>
+            <a href="/privacy" className="hover:text-white transition-colors">Privacy Policy</a>
+          </p>
         </div>
       </div>
     </footer>
