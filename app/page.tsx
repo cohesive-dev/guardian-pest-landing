@@ -474,17 +474,27 @@ function Process() {
 
 // ─── Service Areas ──────────────────────────────────────────────────────────
 
-// TODO: replace these placeholder regions/cities with the real list from Mariah & Tony.
 const AREA_REGIONS: { region: string; cities: string[] }[] = [
-  { region: "Coastal", cities: ["La Jolla", "Carlsbad", "Oceanside", "Encinitas", "Del Mar", "Point Loma", "Pacific Beach", "Coronado"] },
-  { region: "North County", cities: ["Escondido", "Vista", "San Marcos", "Poway", "Rancho Bernardo", "Mira Mesa"] },
-  { region: "East County", cities: ["El Cajon", "Santee", "Spring Valley", "La Mesa", "Lakeside", "Alpine"] },
-  { region: "South Bay", cities: ["Chula Vista", "National City", "Imperial Beach", "Bonita", "Otay Ranch", "Eastlake"] },
+  {
+    region: "Riverside County",
+    cities: [
+      "Perris", "Homeland", "San Jacinto", "Hemet", "Winchester", "Menifee",
+      "French Valley", "Canyon Lake", "Lake Elsinore", "Wildomar", "Murrieta", "Temecula",
+    ],
+  },
+  {
+    region: "San Diego County",
+    cities: [
+      "Fallbrook", "Bonsall", "Vista", "San Marcos", "Escondido", "Poway",
+      "Mira Mesa", "Rancho Bernardo", "La Jolla", "Pacific Beach", "Coronado",
+      "El Cajon", "Santee", "Spring Valley", "La Mesa", "Lakeside",
+      "Chula Vista", "National City", "Bonita",
+    ],
+  },
 ];
 
 function ServiceAreas() {
   const [tab, setTab] = useState(0);
-  const areas = AREA_REGIONS[tab].cities;
 
   return (
     <section id="service-areas" className="py-24 bg-[#F3F6F4] border-t border-slate-200">
@@ -493,11 +503,11 @@ function ServiceAreas() {
           <div>
             <div className="text-xs font-bold text-[#4E9B2D] uppercase tracking-widest mb-3">Service Areas</div>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-[#16243D] mb-4">
-              Proudly defending homes across the county.
+              Proudly defending homes across two counties.
             </h2>
             <p className="text-[#566072] text-lg mb-6">
-              From coastal condos to inland estates, our local crews are close by and ready to help.
-              If you&apos;re in the county, we&apos;ve got you covered.
+              From the Temecula Valley down to the South Bay, our local crews are close by and ready
+              to help. If you&apos;re in Riverside or San Diego County, we&apos;ve got you covered.
             </p>
             <a href="#quote" className="inline-block px-6 py-3 rounded-md bg-[#4E9B2D] text-white text-sm font-bold hover:bg-[#3E7C23] transition-colors shadow-sm">
               Check my address →
@@ -524,15 +534,31 @@ function ServiceAreas() {
               ))}
             </div>
 
-            <div className="flex flex-wrap gap-2.5">
-            {areas.map((a) => (
-              <span key={a} className="inline-flex items-center gap-1.5 bg-white border border-slate-200 rounded-full px-4 py-2 text-sm font-medium text-[#16243D] shadow-sm">
-                <svg className="w-3.5 h-3.5 text-[#4E9B2D]" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M9.69 18.933l.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 00.281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 103 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 002.273 1.765 11.842 11.842 0 00.976.572l.062.029.018.008.006.003zM10 11.25a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z" clipRule="evenodd" />
-                </svg>
-                {a}
-              </span>
-            ))}
+            {/*
+              Every region is rendered into the same grid cell so the block always
+              reserves the height of the longest list — switching tabs never shifts
+              the layout. Only the active list is visible/reachable.
+            */}
+            <div className="grid">
+              {AREA_REGIONS.map((r, i) => (
+                <div
+                  key={r.region}
+                  aria-hidden={i !== tab}
+                  inert={i !== tab ? true : undefined}
+                  className={`[grid-area:1/1] flex flex-wrap content-start gap-2.5 transition-opacity ${
+                    i === tab ? "opacity-100" : "opacity-0 pointer-events-none"
+                  }`}
+                >
+                  {r.cities.map((a) => (
+                    <span key={a} className="inline-flex items-center gap-1.5 bg-white border border-slate-200 rounded-full px-4 py-2 text-sm font-medium text-[#16243D] shadow-sm">
+                      <svg className="w-3.5 h-3.5 text-[#4E9B2D]" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M9.69 18.933l.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 00.281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 103 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 002.273 1.765 11.842 11.842 0 00.976.572l.062.029.018.008.006.003zM10 11.25a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z" clipRule="evenodd" />
+                      </svg>
+                      {a}
+                    </span>
+                  ))}
+                </div>
+              ))}
             </div>
           </div>
         </div>
