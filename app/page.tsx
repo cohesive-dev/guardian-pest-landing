@@ -1,6 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
+import Navbar from "@/app/components/Navbar";
+import Footer from "@/app/components/Footer";
+import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/site";
+import { slugForService } from "@/lib/pests";
 
 // ─── Brand palette ──────────────────────────────────────────────────────────
 // navy   #16243D - primary brand, headings, dark surfaces (from logo shield)
@@ -10,102 +14,12 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 // slate  #566072 - body copy
 // mist   #F3F6F4 - light section backgrounds
 
-const PHONE_DISPLAY = "(858) 555-0147";
-const PHONE_HREF = "tel:+18585550147";
-
 // Progressively format a US phone number as the user types: "(555) 123-4567".
 function formatUSPhone(value: string): string {
   const d = value.replace(/\D/g, "").slice(0, 10);
   if (d.length <= 3) return d;
   if (d.length <= 6) return `(${d.slice(0, 3)}) ${d.slice(3)}`;
   return `(${d.slice(0, 3)}) ${d.slice(3, 6)}-${d.slice(6)}`;
-}
-
-// ─── Nav ────────────────────────────────────────────────────────────────────
-
-function Navbar() {
-  const [open, setOpen] = useState(false);
-  const links = ["Services", "Why Us", "Process", "Service Areas", "Reviews"];
-
-  return (
-    <header className="fixed top-0 inset-x-0 z-50 bg-white border-b border-slate-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <a href="#top" className="flex items-center gap-3">
-            <img src="/logo.png" alt="Guardian Pest & Termite Defense" className="h-14 w-auto object-contain" />
-            <span className="hidden sm:flex flex-col leading-none">
-              <span className="text-[15px] font-extrabold tracking-tight text-[#16243D]">GUARDIAN</span>
-              <span className="text-[10px] font-bold tracking-[0.14em] text-[#4E9B2D]">PEST &amp; TERMITE DEFENSE</span>
-            </span>
-          </a>
-
-          {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-7">
-            {links.map((l) => (
-              <a
-                key={l}
-                href={`#${l.toLowerCase().replace(/\s+/g, "-")}`}
-                className="text-[15px] font-semibold text-[#16243D] hover:text-[#4E9B2D] transition-colors"
-              >
-                {l}
-              </a>
-            ))}
-          </nav>
-
-          {/* CTAs */}
-          <div className="hidden lg:flex items-center gap-5">
-            <a href={PHONE_HREF} className="flex items-center gap-1.5 text-sm font-bold text-[#16243D] hover:text-[#4E9B2D] transition-colors">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
-              </svg>
-              {PHONE_DISPLAY}
-            </a>
-            <a href="#quote" className="px-5 py-2.5 rounded-md bg-[#4E9B2D] text-white text-sm font-bold hover:bg-[#3E7C23] transition-colors shadow-sm">
-              Free Inspection
-            </a>
-          </div>
-
-          {/* Mobile toggle */}
-          <button onClick={() => setOpen(!open)} aria-label="Toggle menu" className="lg:hidden p-2 text-[#16243D] hover:bg-slate-100 rounded-md">
-            {open ? (
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            ) : (
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-              </svg>
-            )}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile menu */}
-      {open && (
-        <div className="lg:hidden border-t border-slate-200 bg-white px-4 pb-4">
-          <nav className="flex flex-col gap-1 pt-2">
-            {links.map((l) => (
-              <a
-                key={l}
-                href={`#${l.toLowerCase().replace(/\s+/g, "-")}`}
-                onClick={() => setOpen(false)}
-                className="py-2.5 px-3 text-sm font-semibold text-[#16243D] hover:bg-slate-50 rounded-md"
-              >
-                {l}
-              </a>
-            ))}
-            <a href={PHONE_HREF} onClick={() => setOpen(false)} className="py-2.5 px-3 text-sm font-bold text-[#16243D] hover:bg-slate-50 rounded-md">
-              Call {PHONE_DISPLAY}
-            </a>
-            <a href="#quote" onClick={() => setOpen(false)} className="mt-2 py-2.5 px-3 rounded-md bg-[#4E9B2D] text-white text-sm font-bold text-center hover:bg-[#3E7C23]">
-              Get a Free Inspection
-            </a>
-          </nav>
-        </div>
-      )}
-    </header>
-  );
 }
 
 // ─── Quote form ─────────────────────────────────────────────────────────────
@@ -272,7 +186,7 @@ function QuoteForm({ compact = false }: { compact?: boolean }) {
 
 function Hero() {
   const collage = [
-    { alt: "San Diego home exterior", image: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=700&q=80&auto=format&fit=crop" },
+    { alt: "Home exterior", image: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=700&q=80&auto=format&fit=crop" },
     { alt: "Clean modern kitchen", image: "https://images.unsplash.com/photo-1556909212-d5b604d0c90d?w=700&q=80&auto=format&fit=crop" },
     { alt: "Backyard patio", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=700&q=80&auto=format&fit=crop" },
     { alt: "Family living room", image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=700&q=80&auto=format&fit=crop" },
@@ -285,21 +199,20 @@ function Hero() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 text-center">
         <div className="inline-flex items-center gap-2 rounded-full bg-[#4E9B2D]/10 px-4 py-1.5 text-xs font-bold text-[#3E7C23] mb-5">
           <span className="w-2 h-2 rounded-full bg-[#4E9B2D]" />
-          Locally owned &amp; serving all of San Diego County
+          Locally owned and operated
         </div>
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#16243D] leading-[1.05] tracking-tight mb-5">
-          San Diego&apos;s frontline defense against{" "}
+          Take back your home from{" "}
           <span className="text-[#4E9B2D]">pests &amp; termites.</span>
         </h1>
         <p className="text-lg text-[#566072] leading-relaxed max-w-2xl mx-auto">
-          Family- and pet-safe treatments that protect your home year-round. Same-week service,
-          honest pricing, and a 100% satisfaction guarantee — from a team that treats your home like its own castle.
+          Family- and pet-safe treatments that protect your home year-round.
         </p>
       </div>
 
       {/* Photo collage */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
-        <div className="grid grid-cols-3 md:grid-cols-6 gap-0 rounded-t-2xl overflow-hidden">
+        <div className="grid grid-cols-3 md:grid-cols-6 gap-0 md:rounded-t-2xl overflow-hidden">
           {collage.map((c, i) => (
             <div key={c.alt} className={`relative h-40 sm:h-56 overflow-hidden ${i >= 3 ? "hidden md:block" : ""}`}>
               <img src={c.image} alt={c.alt} decoding="async" className="w-full h-full object-cover" />
@@ -309,29 +222,30 @@ function Hero() {
         </div>
 
         {/* Overlapping quote widget */}
-        <div id="quote" className="relative z-10 -mt-10 md:-mt-16 flex flex-col md:flex-row gap-4 md:gap-0 px-2 md:px-0 scroll-mt-24">
+        <div id="quote" className="relative z-10 mt-6 md:-mt-16 flex flex-col md:flex-row gap-4 md:gap-0 px-2 md:px-0 scroll-mt-24">
           <div className="md:flex-[5] bg-white shadow-2xl rounded-lg md:rounded-r-none border border-slate-100 p-6 sm:p-8">
             <QuoteForm />
           </div>
 
-          <div className="md:flex-[3] bg-[#16243D] rounded-lg md:rounded-l-none p-6 sm:p-8 flex flex-col justify-center gap-6">
+          {/* Stats panel — desktop only; on mobile the hero badge carries the message. */}
+          <div className="hidden md:flex md:flex-[3] bg-[#16243D] rounded-lg md:rounded-l-none p-6 sm:p-8 flex-col justify-center gap-6">
             <div className="text-[11px] font-bold text-white/50 tracking-[0.1em] uppercase">Why homeowners choose Guardian</div>
             <div className="grid grid-cols-2 gap-x-6 gap-y-5">
               <div>
-                <div className="text-3xl sm:text-4xl font-black text-white leading-none">4,200+</div>
-                <div className="text-xs text-white/60 mt-1 font-medium">homes protected</div>
-              </div>
-              <div>
-                <div className="text-3xl sm:text-4xl font-black text-[#6FBF3F] leading-none">4.9★</div>
-                <div className="text-xs text-white/60 mt-1 font-medium">avg. rating</div>
-              </div>
-              <div>
-                <div className="text-3xl sm:text-4xl font-black text-white leading-none">&lt;30m</div>
-                <div className="text-xs text-white/60 mt-1 font-medium">callback time</div>
+                <div className="text-3xl sm:text-4xl font-black text-white leading-none">30 yrs</div>
+                <div className="text-xs text-white/60 mt-1 font-medium">of experience</div>
               </div>
               <div>
                 <div className="text-3xl sm:text-4xl font-black text-[#6FBF3F] leading-none">100%</div>
-                <div className="text-xs text-white/60 mt-1 font-medium">guarantee</div>
+                <div className="text-xs text-white/60 mt-1 font-medium">guaranteed</div>
+              </div>
+              <div>
+                <div className="text-3xl sm:text-4xl font-black text-white leading-none">30 min</div>
+                <div className="text-xs text-white/60 mt-1 font-medium">avg. call back</div>
+              </div>
+              <div>
+                <div className="text-3xl sm:text-4xl font-black text-[#6FBF3F] leading-none">5.0★</div>
+                <div className="text-xs text-white/60 mt-1 font-medium">avg. rating</div>
               </div>
             </div>
           </div>
@@ -376,7 +290,7 @@ function TrustBar() {
 function Services() {
   const services = [
     { image: "/services/ant.jpg", title: "Ant Control", desc: "Argentine ants, odorous house ants, and carpenter ants — traced back to the colony and eliminated at the source." },
-    { image: "/services/termite.jpg", title: "Termite Defense", desc: "Full inspections, spot treatments, and barrier protection against the subterranean and drywood termites common to San Diego." },
+    { image: "/services/termite.jpg", title: "Termite Defense", desc: "Full inspections, spot treatments, and barrier protection against the subterranean and drywood termites common to the area." },
     { image: "/services/rodent.jpg", title: "Rodent Control", desc: "Rats and mice removed, entry points sealed, and preventive baiting so they don't come back." },
     { image: "/services/cockroach.jpg", title: "Cockroach Removal", desc: "Targeted treatments for German, American, and Oriental roaches in kitchens, bathrooms, and voids." },
     { image: "/services/spider.jpg", title: "Spider & Web Control", desc: "Knock down webs and treat harborage for black widows, brown widows, and nuisance spiders." },
@@ -391,7 +305,7 @@ function Services() {
         <div className="mb-14 max-w-2xl">
           <div className="text-xs font-bold text-[#4E9B2D] uppercase tracking-widest mb-3">Our Services</div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[#16243D] mb-4">
-            One team, every pest San Diego throws at you.
+            Our team vs. your pest.
           </h2>
           <p className="text-[#566072] text-lg">
             From the coast to the canyons, we know the local pests and how to keep them out — with treatments that are tough on bugs and gentle on your family.
@@ -399,27 +313,44 @@ function Services() {
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {services.map((s) => (
-            <div
-              key={s.title}
-              className="group bg-white border border-slate-200 rounded-xl overflow-hidden hover:shadow-lg hover:border-[#4E9B2D] hover:-translate-y-1 transition-all"
-            >
-              <div className="relative h-40 overflow-hidden">
-                <img
-                  src={s.image}
-                  alt={s.title}
-                  loading="lazy"
-                  decoding="async"
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#16243D]/50 to-transparent" />
+          {services.map((s) => {
+            const slug = slugForService(s.title);
+            const cardClass =
+              "group bg-white border border-slate-200 rounded-xl overflow-hidden hover:shadow-lg hover:border-[#4E9B2D] hover:-translate-y-1 transition-all";
+            const inner = (
+              <>
+                <div className="relative h-40 overflow-hidden">
+                  <img
+                    src={s.image}
+                    alt={s.title}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#16243D]/50 to-transparent" />
+                  {slug && (
+                    <span className="absolute top-3 right-3 rounded-full bg-white/90 text-[#16243D] text-[11px] font-bold px-2.5 py-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                      Learn more →
+                    </span>
+                  )}
+                </div>
+                <div className="p-6">
+                  <h3 className="font-bold text-[#16243D] mb-2 group-hover:text-[#4E9B2D] transition-colors">{s.title}</h3>
+                  <p className="text-sm text-[#566072] leading-relaxed">{s.desc}</p>
+                </div>
+              </>
+            );
+
+            return slug ? (
+              <a key={s.title} href={`/pests/${slug}`} className={cardClass}>
+                {inner}
+              </a>
+            ) : (
+              <div key={s.title} className={cardClass}>
+                {inner}
               </div>
-              <div className="p-6">
-                <h3 className="font-bold text-[#16243D] mb-2 group-hover:text-[#4E9B2D] transition-colors">{s.title}</h3>
-                <p className="text-sm text-[#566072] leading-relaxed">{s.desc}</p>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         <div className="mt-10">
@@ -445,7 +376,7 @@ function WhyUs() {
     },
     {
       title: "Local experts",
-      desc: "Born and raised in San Diego, our technicians know exactly which pests hit which neighborhoods, and when.",
+      desc: "Locally owned and operated — our technicians know exactly which pests hit which neighborhoods, and when.",
       icon: (
         <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
       ),
@@ -526,7 +457,7 @@ function Process() {
                 <div className="hidden lg:block absolute top-12 left-1/2 h-px bg-slate-200" style={{ width: "calc(100% + 3rem)" }} />
               )}
               <div className="flex flex-col items-center text-center">
-                <div className={`w-24 h-24 rounded-2xl flex items-center justify-center text-3xl font-black mb-6 relative z-10 ${i === 1 ? "bg-[#4E9B2D] text-white" : "bg-[#16243D] text-white"}`}>
+                <div className="w-24 h-24 rounded-2xl flex items-center justify-center text-3xl font-black mb-6 relative z-10 bg-[#4E9B2D] text-white">
                   {s.step}
                 </div>
                 <h3 className="text-xl font-bold text-[#16243D] mb-3">{s.title}</h3>
@@ -543,13 +474,17 @@ function Process() {
 
 // ─── Service Areas ──────────────────────────────────────────────────────────
 
+// TODO: replace these placeholder regions/cities with the real list from Mariah & Tony.
+const AREA_REGIONS: { region: string; cities: string[] }[] = [
+  { region: "Coastal", cities: ["La Jolla", "Carlsbad", "Oceanside", "Encinitas", "Del Mar", "Point Loma", "Pacific Beach", "Coronado"] },
+  { region: "North County", cities: ["Escondido", "Vista", "San Marcos", "Poway", "Rancho Bernardo", "Mira Mesa"] },
+  { region: "East County", cities: ["El Cajon", "Santee", "Spring Valley", "La Mesa", "Lakeside", "Alpine"] },
+  { region: "South Bay", cities: ["Chula Vista", "National City", "Imperial Beach", "Bonita", "Otay Ranch", "Eastlake"] },
+];
+
 function ServiceAreas() {
-  const areas = [
-    "Downtown San Diego", "La Jolla", "Chula Vista", "El Cajon", "Carlsbad",
-    "Escondido", "Oceanside", "Encinitas", "Poway", "Santee",
-    "National City", "Vista", "San Marcos", "Coronado", "Del Mar",
-    "Point Loma", "Pacific Beach", "Mira Mesa", "Rancho Bernardo", "Spring Valley",
-  ];
+  const [tab, setTab] = useState(0);
+  const areas = AREA_REGIONS[tab].cities;
 
   return (
     <section id="service-areas" className="py-24 bg-[#F3F6F4] border-t border-slate-200">
@@ -558,7 +493,7 @@ function ServiceAreas() {
           <div>
             <div className="text-xs font-bold text-[#4E9B2D] uppercase tracking-widest mb-3">Service Areas</div>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-[#16243D] mb-4">
-              Proudly defending homes across San Diego County.
+              Proudly defending homes across the county.
             </h2>
             <p className="text-[#566072] text-lg mb-6">
               From coastal condos to inland estates, our local crews are close by and ready to help.
@@ -569,7 +504,27 @@ function ServiceAreas() {
             </a>
           </div>
 
-          <div className="flex flex-wrap gap-2.5">
+          <div>
+            {/* Region tabs */}
+            <div className="flex flex-wrap gap-2 mb-5 border-b border-slate-200 pb-3">
+              {AREA_REGIONS.map((r, i) => (
+                <button
+                  key={r.region}
+                  type="button"
+                  onClick={() => setTab(i)}
+                  aria-pressed={i === tab}
+                  className={`px-4 py-2 rounded-md text-sm font-bold transition-colors ${
+                    i === tab
+                      ? "bg-[#16243D] text-white"
+                      : "bg-white border border-slate-200 text-[#16243D] hover:border-[#4E9B2D] hover:text-[#4E9B2D]"
+                  }`}
+                >
+                  {r.region}
+                </button>
+              ))}
+            </div>
+
+            <div className="flex flex-wrap gap-2.5">
             {areas.map((a) => (
               <span key={a} className="inline-flex items-center gap-1.5 bg-white border border-slate-200 rounded-full px-4 py-2 text-sm font-medium text-[#16243D] shadow-sm">
                 <svg className="w-3.5 h-3.5 text-[#4E9B2D]" viewBox="0 0 20 20" fill="currentColor">
@@ -578,6 +533,7 @@ function ServiceAreas() {
                 {a}
               </span>
             ))}
+            </div>
           </div>
         </div>
       </div>
@@ -594,7 +550,7 @@ function Testimonials() {
     { quote: "Rats in the attic freaked me out. They sealed every entry point and set us up on quarterly service. Six months later, zero problems.", author: "Priya S.", company: "Mira Mesa · Homeowner", initials: "PS", color: "bg-[#16243D]" },
     { quote: "Two dogs and a toddler, so the pet-safe treatment mattered to us. Everyone was back in the yard by dinner. Couldn't be happier.", author: "Marcus B.", company: "Chula Vista · Homeowner", initials: "MB", color: "bg-[#4E9B2D]" },
     { quote: "Called on a Monday, inspected Tuesday, treated Wednesday. The wasp nest by our door is gone and the crew was super friendly.", author: "Ana R.", company: "Encinitas · Homeowner", initials: "AR", color: "bg-[#16243D]" },
-    { quote: "Best pest company we've used in 20 years in San Diego. Responsive, fairly priced, and they actually stand behind the guarantee.", author: "Greg H.", company: "Poway · Homeowner", initials: "GH", color: "bg-[#4E9B2D]" },
+    { quote: "Best pest company we've used in 20 years. Responsive, fairly priced, and they actually stand behind the guarantee.", author: "Greg H.", company: "Poway · Homeowner", initials: "GH", color: "bg-[#4E9B2D]" },
   ];
 
   const trackRef = useRef<HTMLDivElement>(null);
@@ -632,11 +588,11 @@ function Testimonials() {
         <div className="mb-10 text-center sm:text-left">
           <div className="text-xs font-bold text-[#4E9B2D] uppercase tracking-widest mb-3">Reviews</div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[#16243D]">
-            San Diego homeowners trust Guardian.
+            Homeowners trust Guardian.
           </h2>
           <div className="mt-3 flex items-center justify-center sm:justify-start gap-2 text-sm text-[#566072]">
             <span className="text-[#F5A623] text-lg tracking-tight">★★★★★</span>
-            <span className="font-semibold text-[#16243D]">4.9/5</span>
+            <span className="font-semibold text-[#16243D]">5.0/5</span>
             <span>from 600+ verified reviews</span>
           </div>
         </div>
@@ -707,10 +663,10 @@ function FinalCTA() {
   return (
     <section className="py-24 bg-[#16243D] relative overflow-hidden">
       <img
-        src="/logo-mark.png"
+        src="/logo-emblem.png"
         alt=""
         aria-hidden="true"
-        className="absolute pointer-events-none select-none left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 h-[95%] w-auto object-contain brightness-0 invert opacity-[0.05]"
+        className="absolute pointer-events-none select-none left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 h-[80%] w-auto object-contain opacity-[0.06]"
       />
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-10 items-center">
@@ -745,78 +701,6 @@ function FinalCTA() {
   );
 }
 
-// ─── Footer ─────────────────────────────────────────────────────────────────
-
-function Footer() {
-  return (
-    <footer className="bg-[#0f1a2e] text-white/70 pt-16 pb-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
-          {/* Brand */}
-          <div className="col-span-2 md:col-span-1">
-            <div className="mb-4">
-              <span className="inline-flex bg-white rounded-xl p-2.5 shadow-sm">
-                <img src="/logo.png" alt="Guardian Pest & Termite Defense" className="h-16 w-auto object-contain" />
-              </span>
-            </div>
-            <p className="text-sm leading-relaxed mb-4">
-              San Diego&apos;s trusted pest &amp; termite defense. Family-owned, locally operated,
-              and 100% guaranteed.
-            </p>
-            <a href={PHONE_HREF} className="text-white font-bold hover:text-[#6FBF3F] transition-colors">{PHONE_DISPLAY}</a>
-          </div>
-
-          {/* Services */}
-          <div>
-            <h4 className="text-white font-semibold text-sm mb-4">Services</h4>
-            <ul className="space-y-2 text-sm">
-              {["Ant Control", "Termite Defense", "Rodent Control", "Cockroach Removal", "Spiders & Webs", "Bees & Wasps", "Mosquito Reduction"].map((l) => (
-                <li key={l}><a href="#services" className="hover:text-white transition-colors">{l}</a></li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Company */}
-          <div>
-            <h4 className="text-white font-semibold text-sm mb-4">Company</h4>
-            <ul className="space-y-2 text-sm">
-              {[
-                { label: "Why Guardian", href: "#why-us" },
-                { label: "How It Works", href: "#process" },
-                { label: "Service Areas", href: "#service-areas" },
-                { label: "Reviews", href: "#reviews" },
-                { label: "Free Inspection", href: "#quote" },
-              ].map((l) => (
-                <li key={l.label}><a href={l.href} className="hover:text-white transition-colors">{l.label}</a></li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <h4 className="text-white font-semibold text-sm mb-4">Get in Touch</h4>
-            <ul className="space-y-2 text-sm">
-              <li><a href={PHONE_HREF} className="hover:text-white transition-colors">{PHONE_DISPLAY}</a></li>
-              <li><a href="mailto:hello@guardianpestdefense.com" className="hover:text-white transition-colors">hello@guardianpestdefense.com</a></li>
-              <li className="pt-1">San Diego, CA</li>
-              <li>Mon–Sat · 7am–7pm</li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row gap-3 md:items-center md:justify-between">
-          <p className="text-xs">© 2026 Guardian Pest &amp; Termite Defense. All rights reserved.</p>
-          <p className="text-xs text-white/50">
-            Licensed &amp; insured · CA Structural Pest Control Board
-            <span className="mx-2">·</span>
-            <a href="/privacy" className="hover:text-white transition-colors">Privacy Policy</a>
-          </p>
-        </div>
-      </div>
-    </footer>
-  );
-}
-
 // ─── Page ───────────────────────────────────────────────────────────────────
 
 export default function Home() {
@@ -826,9 +710,9 @@ export default function Home() {
       <main>
         <Hero />
         <TrustBar />
-        <Services />
         <WhyUs />
         <Process />
+        <Services />
         <ServiceAreas />
         <Testimonials />
         <FinalCTA />
