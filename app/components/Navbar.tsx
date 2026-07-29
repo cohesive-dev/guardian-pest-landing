@@ -15,12 +15,12 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <a href="/#top" className="flex items-center gap-3">
-            <img src="/logo.png" alt="Guardian Pest & Termite Defense" className="h-14 w-auto object-contain" />
-            <span className="hidden sm:flex flex-col leading-none">
-              <span className="text-[15px] font-extrabold tracking-tight text-[#16243D]">GUARDIAN</span>
-              <span className="text-[10px] font-bold tracking-[0.14em] text-[#4E9B2D]">PEST &amp; TERMITE DEFENSE</span>
-            </span>
+          <a href="/#top" className="flex items-center">
+            <img
+              src="/logo-horizontal.png"
+              alt="Guardian Pest &amp; Termite Defense"
+              className="h-11 sm:h-14 w-auto object-contain"
+            />
           </a>
 
           {/* Desktop nav */}

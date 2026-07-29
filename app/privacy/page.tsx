@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Privacy Policy | Guardian Pest & Termite Defense",
@@ -6,21 +7,18 @@ export const metadata: Metadata = {
     "How Guardian Pest & Termite Defense collects, uses, and protects your personal information.",
 };
 
-const PHONE_DISPLAY = "(858) 555-0147";
-const PHONE_HREF = "tel:+18585550147";
-
 export default function PrivacyPolicy() {
   return (
     <>
       {/* Simple header */}
       <header className="border-b border-slate-200 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-          <a href="/" className="flex items-center gap-3">
-            <img src="/logo.png" alt="Guardian Pest & Termite Defense" className="h-14 w-auto object-contain" />
-            <span className="hidden sm:flex flex-col leading-none">
-              <span className="text-[15px] font-extrabold tracking-tight text-[#16243D]">GUARDIAN</span>
-              <span className="text-[10px] font-bold tracking-[0.14em] text-[#4E9B2D]">PEST &amp; TERMITE DEFENSE</span>
-            </span>
+          <a href="/" className="flex items-center">
+            <img
+              src="/logo-horizontal.png"
+              alt="Guardian Pest &amp; Termite Defense"
+              className="h-11 sm:h-14 w-auto object-contain"
+            />
           </a>
           <a href="/" className="text-sm font-semibold text-[#16243D] hover:text-[#4E9B2D] transition-colors">
             ← Back to home

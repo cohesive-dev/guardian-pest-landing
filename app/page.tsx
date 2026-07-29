@@ -119,7 +119,7 @@ function QuoteForm({ compact = false }: { compact?: boolean }) {
               onChange={(e) => setPhone(formatUSPhone(e.target.value))}
               pattern="\(\d{3}\) \d{3}-\d{4}"
               title="Enter a 10-digit US phone number"
-              placeholder="(858) 555-0147"
+              placeholder="(800) 301-6543"
               className="w-full border border-slate-300 rounded-md px-3 py-2.5 text-sm text-[#16243D] focus:outline-none focus:ring-2 focus:ring-[#4E9B2D]/40 focus:border-[#4E9B2D]"
             />
           </label>
@@ -202,11 +202,12 @@ function Hero() {
           Locally owned and operated
         </div>
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#16243D] leading-[1.05] tracking-tight mb-5">
-          Take back your home from{" "}
-          <span className="text-[#4E9B2D]">pests &amp; termites.</span>
+          Frontline defense from{" "}
+          <span className="text-[#4E9B2D]">pest and termite</span>
         </h1>
         <p className="text-lg text-[#566072] leading-relaxed max-w-2xl mx-auto">
-          Family- and pet-safe treatments that protect your home year-round.
+          Honest pricing &amp; 100% satisfaction guarantee from the team that treats your home like
+          their own.
         </p>
       </div>
 
@@ -236,16 +237,16 @@ function Hero() {
                 <div className="text-xs text-white/60 mt-1 font-medium">of experience</div>
               </div>
               <div>
-                <div className="text-3xl sm:text-4xl font-black text-[#6FBF3F] leading-none">100%</div>
-                <div className="text-xs text-white/60 mt-1 font-medium">guaranteed</div>
-              </div>
-              <div>
                 <div className="text-3xl sm:text-4xl font-black text-white leading-none">30 min</div>
                 <div className="text-xs text-white/60 mt-1 font-medium">avg. call back</div>
               </div>
               <div>
                 <div className="text-3xl sm:text-4xl font-black text-[#6FBF3F] leading-none">5.0★</div>
                 <div className="text-xs text-white/60 mt-1 font-medium">avg. rating</div>
+              </div>
+              <div>
+                <div className="text-3xl sm:text-4xl font-black text-[#6FBF3F] leading-none">100%</div>
+                <div className="text-xs text-white/60 mt-1 font-medium">guaranteed</div>
               </div>
             </div>
           </div>
@@ -261,7 +262,7 @@ function Hero() {
 
 function TrustBar() {
   const items = [
-    "Licensed & Insured (CA PR #00000)",
+    "Licensed & Insured",
     "Family & Pet Safe",
     "Same-Week Service",
     "Free Inspections",
@@ -443,7 +444,7 @@ function Process() {
         <div className="mb-16 text-center max-w-2xl mx-auto">
           <div className="text-xs font-bold text-[#4E9B2D] uppercase tracking-widest mb-3">How It Works</div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[#16243D] mb-4">
-            Pest-free in three simple steps.
+            In three simple steps.
           </h2>
           <p className="text-[#566072] text-lg">
             No long contracts, no runaround. Just fast, effective protection for your home.
