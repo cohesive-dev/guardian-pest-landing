@@ -4,7 +4,7 @@ import { PHONE_DISPLAY, PHONE_HREF, EMAIL } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Privacy Policy | Guardian Pest & Termite Defense",
   description:
-    "How Guardian Pest & Termite Defense collects, uses, and protects your personal information.",
+    "How Guardian Pest & Termite Defense collects, uses, and protects your personal information, including mobile number and text messaging consent data.",
 };
 
 export default function PrivacyPolicy() {
@@ -141,10 +141,40 @@ export default function PrivacyPolicy() {
             </div>
 
             <div>
+              <h2 className="text-xl font-bold text-[#16243D] mb-4">Data Retention</h2>
+              <p>
+                We keep personal information for as long as needed to provide services to you, meet our legal and tax
+                obligations, resolve disputes, and enforce our agreements. Records of your text messaging opt-in and any
+                opt-out request are retained for as long as required to honor your preference and to satisfy applicable
+                messaging compliance requirements.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="text-xl font-bold text-[#16243D] mb-4">California Privacy Rights</h2>
+              <p>
+                California residents may have the right to know what personal information we collect, request a copy of
+                it, request its deletion, and correct inaccurate information. We do not sell or share personal
+                information as those terms are defined under the California Consumer Privacy Act, and we will not
+                discriminate against you for exercising these rights. To make a request, contact us using the details
+                below.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="text-xl font-bold text-[#16243D] mb-4">Children&apos;s Privacy</h2>
+              <p>
+                Our website and services are intended for adults. We do not knowingly collect personal information from
+                children under 13. If you believe a child has provided us with personal information, contact us and we
+                will delete it.
+              </p>
+            </div>
+
+            <div>
               <h2 className="text-xl font-bold text-[#16243D] mb-4">Policy Updates</h2>
               <p>
                 We reserve the right to modify this policy, with changes becoming effective immediately upon posting on
-                our website.
+                our website. The &ldquo;last updated&rdquo; date above reflects the most recent revision.
               </p>
             </div>
 

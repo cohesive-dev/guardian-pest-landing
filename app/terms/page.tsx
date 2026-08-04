@@ -82,7 +82,8 @@ export default function Terms() {
 
               <p className="mb-3">
                 <span className="font-semibold text-[#16243D]">Supported carriers:</span> Carriers including AT&amp;T,
-                Verizon Wireless, T-Mobile, Sprint, Boost, U.S. Cellular, MetroPCS, and others are supported.{" "}
+                Verizon Wireless, T-Mobile, Boost Mobile, U.S. Cellular, Metro by T-Mobile, and others are supported.
+                Supported carriers may change without notice.{" "}
                 <span className="font-semibold text-[#16243D]">
                   Carriers are not liable for any delayed or undelivered messages.
                 </span>
@@ -174,6 +175,15 @@ export default function Terms() {
                 We may update these Terms &amp; Conditions at any time. Changes become effective immediately upon
                 posting on this page, and the &ldquo;last updated&rdquo; date above will reflect the most recent
                 revision.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="text-xl font-bold text-[#16243D] mb-4">Governing Law</h2>
+              <p>
+                These Terms &amp; Conditions are governed by the laws of the State of California, without regard to its
+                conflict of law provisions. Nothing in these terms limits any liability or waives any right that cannot
+                be limited or waived under applicable law.
               </p>
             </div>
 
