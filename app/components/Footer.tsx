@@ -66,6 +66,8 @@ export default function Footer() {
             Licensed &amp; insured · CA Structural Pest Control Board
             <span className="mx-2">·</span>
             <a href="/privacy" className="hover:text-white transition-colors">Privacy Policy</a>
+            <span className="mx-2">·</span>
+            <a href="/terms" className="hover:text-white transition-colors">Terms &amp; Conditions</a>
           </p>
         </div>
       </div>
