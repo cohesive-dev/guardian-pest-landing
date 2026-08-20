@@ -99,8 +99,8 @@ export default function PrivacyPolicy() {
                   {PHONE_DISPLAY}
                 </a>{" "}
                 or{" "}
-                <a href="mailto:hello@guardianpestdefense.com" className="text-[#4E9B2D] font-semibold hover:underline">
-                  hello@guardianpestdefense.com
+                <a href="mailto:hello@guardianpestandtermitedefense.com" className="text-[#4E9B2D] font-semibold hover:underline">
+                  hello@guardianpestandtermitedefense.com
                 </a>
                 .
               </p>

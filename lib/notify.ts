@@ -57,15 +57,15 @@ function buildBody(lead: Lead) {
       </div>
       <table style="width:100%;border-collapse:collapse;border:1px solid #e2e8f0;border-top:0;border-radius:0 0 10px 10px;overflow:hidden">
         ${rows
-          .filter(([, v]) => v)
-          .map(
-            ([k, v], i) => `
+      .filter(([, v]) => v)
+      .map(
+        ([k, v], i) => `
           <tr style="background:${i % 2 ? "#f8fafc" : "#ffffff"}">
             <td style="padding:12px 16px;font-size:12px;font-weight:700;color:#566072;width:140px;vertical-align:top">${esc(k)}</td>
             <td style="padding:12px 16px;font-size:14px;color:#16243D">${esc(String(v))}</td>
           </tr>`,
-          )
-          .join("")}
+      )
+      .join("")}
       </table>
       <p style="font-size:12px;color:#94a3b8;margin-top:16px;text-align:center">
         Sent automatically from the Guardian Pest &amp; Termite Defense website.
