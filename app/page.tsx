@@ -5,6 +5,7 @@ import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
 import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/site";
 import { slugForService } from "@/lib/pests";
+import { trackLeadFormConversion } from "@/lib/gtag";
 
 // ─── Brand palette ──────────────────────────────────────────────────────────
 // navy   #16243D - primary brand, headings, dark surfaces (from logo shield)
@@ -62,6 +63,7 @@ function QuoteForm({ compact = false }: { compact?: boolean }) {
         const data = await res.json().catch(() => null);
         throw new Error(data?.error ?? "Something went wrong.");
       }
+      trackLeadFormConversion();
       setSubmitted(true);
     } catch (err) {
       setError(
